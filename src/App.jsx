@@ -1,19 +1,16 @@
-import CardProduto from './components/CardProduto';
-import styled from 'styled-components';
-
-const PageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-`;
+import { RecoilRoot } from 'recoil';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
-    <PageWrapper>
-      <CardProduto />
-    </PageWrapper>
+    <RecoilRoot>
+      <div className="p-10">
+        <h1 className="text-2xl font-bold mb-6">Lista Recoil EBAC</h1>
+        <TodoForm />
+        <TodoList />
+      </div>
+    </RecoilRoot>
   );
 }
 

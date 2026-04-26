@@ -1,27 +1,32 @@
 import { useState } from 'react';
-import { useTodo } from '../context/TodoContext';
+import { useSetRecoilState } from 'recoil';
+import { listaTodoState } from '../recoil/todoState';
 
 export default function TodoForm() {
-  const [text, setText] = useState('');
-  const { addTodo } = useTodo();
+  const [texto, setTexto] = useState('');
+  const setLista = useSetRecoilState(listaTodoState);
 
-  const handleSubmit = (e) => {
+  const adicionarTarefa = (e) => {
     e.preventDefault();
-    if (!text.trim()) return;
-    addTodo(text);
-    setText('');
+    if (!texto.trim()) return;
+
+    setLista((listaAntiga) => [
+      ...listaAntiga,
+      { id: Date.now(), texto: texto, estaConcluido: false }
+    ]);
+    setTexto('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
+    <form onSubmit={adicionarTarefa} className="flex gap-2 mb-4">
       <input 
-        type="text" value={text} onChange={(e) => setText(e.target.value)}
-        placeholder="Nova tarefa..."
-        className="flex-1 p-3 rounded-xl border focus:ring-2 focus:ring-indigo-500 outline-none"
+        type="text" 
+        value={texto} 
+        onChange={(e) => setTexto(e.target.value)}
+        placeholder="O que precisa ser feito?"
+        className="border p-2 rounded"
       />
-      <button className="bg-indigo-600 text-white px-6 rounded-xl font-bold hover:bg-indigo-700 transition">
-        +
-      </button>
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add</button>
     </form>
   );
 }
