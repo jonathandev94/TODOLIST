@@ -1,16 +1,19 @@
-import { RecoilRoot } from 'recoil';
+import { GlobalStyle, AppWrapper, Title } from './styles/styles';
 import TodoForm from './components/TodoForm';
+import TodoFilters from './components/TodoFilters';
 import TodoList from './components/TodoList';
 
 function App() {
   return (
-    <RecoilRoot>
-      <div className="p-10">
-        <h1 className="text-2xl font-bold mb-6">Lista Recoil EBAC</h1>
+    <>
+      <GlobalStyle />
+      <AppWrapper>
+        <Title>FocusUp ✅</Title>
         <TodoForm />
+        <TodoFilters />
         <TodoList />
-      </div>
-    </RecoilRoot>
+      </AppWrapper>
+    </>
   );
 }
 

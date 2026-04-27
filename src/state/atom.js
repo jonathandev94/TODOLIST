@@ -1,18 +1,18 @@
 import { atom, selector } from 'recoil';
 
-// Matéria-prima: A lista bruta
+// Chave única para a lista
 export const listaTodoState = atom({
-  key: 'listaTodoState',
+  key: 'listaTodoState', 
   default: [],
 });
 
-// Filtro selecionado: 'Todas', 'Concluídas' ou 'Pendentes'
+// Chave única para o filtro
 export const filtroTodoState = atom({
   key: 'filtroTodoState',
-  default: 'Todas',
+  default: 'todos',
 });
 
-// Produto Processado: Lista já filtrada para exibir na tela
+// Selector para a lógica de filtro
 export const listaFiltradaState = selector({
   key: 'listaFiltradaState',
   get: ({ get }) => {
@@ -20,10 +20,10 @@ export const listaFiltradaState = selector({
     const filtro = get(filtroTodoState);
 
     switch (filtro) {
-      case 'Concluídas':
-        return lista.filter((item) => item.estaConcluido);
-      case 'Pendentes':
-        return lista.filter((item) => !item.estaConcluido);
+      case 'concluidos':
+        return lista.filter(item => item.concluido);
+      case 'pendentes':
+        return lista.filter(item => !item.concluido);
       default:
         return lista;
     }
